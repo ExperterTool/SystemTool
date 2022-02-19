@@ -29,6 +29,21 @@ echo.
 :systemtool_cmd
 echo.
 set /p systemtool_cmd="Command: "
+if "%systemtool_cmd%" == ".updatelog" (
+echo.
+echo Update v4.0:
+echo - Added .updatelog Command
+echo.
+echo Update v3.0
+echo - Added .checkadmin Command
+echo.
+echo Update v2.0
+echo - Added .version Command
+echo.
+echo Update v1.0
+echo - The first release!
+goto systemtool_cmd
+)
 if "%systemtool_cmd%" == ".checkadmin" (
 if "%admin_rights%" == "1" (
 echo Running as Administrator!
@@ -39,11 +54,11 @@ goto systemtool_cmd
 )
 )
 if "%systemtool_cmd%" == ".v" (
-echo Version: v3.0
+echo Version: v4.0
 goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".version" (
-echo Version: v3.0
+echo Version: v4.0
 goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".support" (
