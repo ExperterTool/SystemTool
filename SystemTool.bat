@@ -29,12 +29,21 @@ echo.
 :systemtool_cmd
 echo.
 set /p systemtool_cmd="Command: "
+if "%systemtool_cmd%" == ".checkadmin" (
+if "%admin_rights%" == "1" (
+echo Running as Administrator!
+goto systemtool_cmd
+) else (
+echo Running in Normal Mode!
+goto systemtool_cmd
+)
+)
 if "%systemtool_cmd%" == ".v" (
-echo Version: v2.0
+echo Version: v3.0
 goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".version" (
-echo Version: v2.0
+echo Version: v3.0
 goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".support" (
@@ -246,6 +255,9 @@ echo.
 echo   .support            It gives you Email Support!
 echo.
 echo   .version            It's showing the current version of this application!
+echo.
+echo   .checkadmin         Checks if the current session is running as Administrator
+echo                       or as Normal User!
 ) else (
 echo Sorry! This command is unavailable.
 )
