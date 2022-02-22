@@ -31,6 +31,13 @@ echo.
 set /p systemtool_cmd="Command: "
 if "%systemtool_cmd%" == ".updatelog" (
 echo.
+echo Update v5.0:
+echo - Added new types of activation:
+echo   -       Windows 10 Enterprise
+echo   - [NEW] Windows 11 Enterprise
+echo   - [NEW] Windows 10 Pro
+echo   - [NEW] Windows 11 Pro
+echo.
 echo Update v4.0:
 echo - Added .updatelog Command
 echo.
@@ -54,11 +61,11 @@ goto systemtool_cmd
 )
 )
 if "%systemtool_cmd%" == ".v" (
-echo Version: v4.0
+echo Version: v5.0
 goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".version" (
-echo Version: v4.0
+echo Version: v5.0
 goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".support" (
@@ -110,7 +117,7 @@ echo Sorry! This command is running only as Administrator.
 goto systemtool_cmd
 )
 )
-if "%systemtool_cmd%" == ".settings /activate 7" (
+if "%systemtool_cmd%" == ".settings /activate 7 /ultimate" (
 if "%admin_rights%" == "1" (
 cscript //nologo C:\Windows\System32\slmgr.vbs /upk >nul 2>nul
 cscript //nologo C:\Windows\System32\slmgr.vbs /cpky >nul 2>nul
@@ -123,7 +130,52 @@ echo Sorry! This command is running only as Administrator.
 goto systemtool_cmd
 )
 )
-if "%systemtool_cmd%" == ".settings /activate 10" (
+if "%systemtool_cmd%" == ".settings /activate 11 /pro" (
+if "%admin_rights%" == "1" (
+cscript //nologo C:\Windows\System32\slmgr.vbs /upk >nul 2>nul
+cscript //nologo C:\Windows\System32\slmgr.vbs /cpky >nul 2>nul
+cscript //nologo C:\Windows\System32\slmgr.vbs /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX >nul 2>nul
+cscript //nologo C:\Windows\System32\slmgr.vbs /skms s8.uk.to >nul 2>nul
+cscript //nologo C:\Windows\System32\slmgr.vbs /ato >nul 2>nul
+cscript //nologo C:\Windows\System32\slmgr.vbs /ckms >nul 2>nul
+echo Successfully Activated Windows 11 Pro!
+goto systemtool_cmd
+) else (
+echo Sorry! This command is running only as Administrator.
+goto systemtool_cmd
+)
+)
+if "%systemtool_cmd%" == ".settings /activate 10 /pro" (
+if "%admin_rights%" == "1" (
+cscript //nologo C:\Windows\System32\slmgr.vbs /upk >nul 2>nul
+cscript //nologo C:\Windows\System32\slmgr.vbs /cpky >nul 2>nul
+cscript //nologo C:\Windows\System32\slmgr.vbs /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX >nul 2>nul
+cscript //nologo C:\Windows\System32\slmgr.vbs /skms s8.uk.to >nul 2>nul
+cscript //nologo C:\Windows\System32\slmgr.vbs /ato >nul 2>nul
+cscript //nologo C:\Windows\System32\slmgr.vbs /ckms >nul 2>nul
+echo Successfully Activated Windows 10 Pro!
+goto systemtool_cmd
+) else (
+echo Sorry! This command is running only as Administrator.
+goto systemtool_cmd
+)
+)
+if "%systemtool_cmd%" == ".settings /activate 11 /enterprise" (
+if "%admin_rights%" == "1" (
+cscript //nologo C:\Windows\System32\slmgr.vbs /upk >nul 2>nul
+cscript //nologo C:\Windows\System32\slmgr.vbs /cpky >nul 2>nul
+cscript //nologo C:\Windows\System32\slmgr.vbs /ipk NPPR9-FWDCX-D2C8J-H872K-2YT43 >nul 2>nul
+cscript //nologo C:\Windows\System32\slmgr.vbs /skms s8.uk.to >nul 2>nul
+cscript //nologo C:\Windows\System32\slmgr.vbs /ato >nul 2>nul
+cscript //nologo C:\Windows\System32\slmgr.vbs /ckms >nul 2>nul
+echo Successfully Activated Windows 11 Enterprise!
+goto systemtool_cmd
+) else (
+echo Sorry! This command is running only as Administrator.
+goto systemtool_cmd
+)
+)
+if "%systemtool_cmd%" == ".settings /activate 10 /enterprise" (
 if "%admin_rights%" == "1" (
 cscript //nologo C:\Windows\System32\slmgr.vbs /upk >nul 2>nul
 cscript //nologo C:\Windows\System32\slmgr.vbs /cpky >nul 2>nul
@@ -247,7 +299,19 @@ echo   .settings /enable cortana
 echo                       [ADMIN_REQUIRED] [WINDOWS 10 REQUIRED]
 echo                       It enables back the Windows 10 Cortana!
 echo.
-echo   .settings /activate 10
+echo   .settings /activate 11 /pro
+echo                       [ADMIN_REQUIRED] [WINDOWS 10 REQUIRED]
+echo                       It activates Windows 10 Enterprise!
+echo.
+echo   .settings /activate 11 /enterprise
+echo                       [ADMIN_REQUIRED] [WINDOWS 10 REQUIRED]
+echo                       It activates Windows 10 Enterprise!
+echo.
+echo   .settings /activate 10 /pro
+echo                       [ADMIN_REQUIRED] [WINDOWS 10 REQUIRED]
+echo                       It activates Windows 10 Enterprise!
+echo.
+echo   .settings /activate 10 /enterprise
 echo                       [ADMIN_REQUIRED] [WINDOWS 10 REQUIRED]
 echo                       It activates Windows 10 Enterprise!
 echo.
