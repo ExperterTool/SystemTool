@@ -32,8 +32,9 @@ set /p systemtool_cmd="Command: "
 if "%systemtool_cmd%" == ".updatelog" (
 echo.
 echo Update v5.0:
+echo - Added support for Windows 11
+echo - Added support for Pro Edition
 echo - Added new types of activation:
-echo   -       Windows 10 Enterprise
 echo   - [NEW] Windows 11 Enterprise
 echo   - [NEW] Windows 10 Pro
 echo   - [NEW] Windows 11 Pro
@@ -193,7 +194,7 @@ goto systemtool_cmd
 if "%systemtool_cmd%" == ".settings /enable cortana" (
 if "%admin_rights%" == "1" (
 reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCortana /f >nul 2>nul
-echo Successfully enabled Windows 10 Cortana!
+echo Successfully enabled Windows 10/11 Cortana!
 goto systemtool_cmd
 ) else (
 echo Sorry! This command is running only as Administrator.
@@ -213,7 +214,7 @@ goto systemtool_cmd
 if "%systemtool_cmd%" == ".settings /enable auto-update" (
 if "%admin_rights%" == "1" (
 reg delete HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU /v NoAutoUpdate /f >nul 2>nul
-echo Successfully enabled Windows 10 Auto-Updates!
+echo Successfully enabled Windows 10/11 Auto-Updates!
 goto systemtool_cmd
 ) else (
 echo Sorry! This command is running only as Administrator.
@@ -223,7 +224,7 @@ goto systemtool_cmd
 if "%systemtool_cmd%" == ".settings /disable cortana" (
 if "%admin_rights%" == "1" (
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCortana /t REG_DWORD /d 0 /f >nul 2>nul
-echo Successfully disabled Windows 10 Cortana!
+echo Successfully disabled Windows 10/11 Cortana!
 goto systemtool_cmd
 ) else (
 echo Sorry! This command is running only as Administrator.
@@ -243,7 +244,7 @@ goto systemtool_cmd
 if "%systemtool_cmd%" == ".settings /disable auto-update" (
 if "%admin_rights%" == "1" (
 reg add HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU /v NoAutoUpdate /t REG_DWORD /d 1 /f >nul 2>nul
-echo Successfully disabled Windows 10 Auto-Updates!
+echo Successfully disabled Windows 10/11 Auto-Updates!
 goto systemtool_cmd
 ) else (
 echo Sorry! This command is running only as Administrator.
@@ -276,28 +277,28 @@ echo   .deltemp            [ADMIN_REQUIRED]
 echo                       It deletes the temporary files from the local user and Windows!
 echo.
 echo   .settings /disable auto-update
-echo                       [ADMIN_REQUIRED] [WINDOWS 10 REQUIRED]
-echo                       It disables the Windows 10 Auto Updates!
+echo                       [ADMIN_REQUIRED] [WINDOWS 10/11 REQUIRED]
+echo                       It disables the Windows 10/11 Auto Updates!
 echo.
 echo   .settings /disable defender
 echo                       [ADMIN_REQUIRED]
 echo                       It disables the Windows Defender!
 echo.
 echo   .settings /disable cortana
-echo                       [ADMIN_REQUIRED] [WINDOWS 10 REQUIRED]
-echo                       It disables the Windows 10 Cortana!
+echo                       [ADMIN_REQUIRED] [WINDOWS 10/11 REQUIRED]
+echo                       It disables the Windows 10/11 Cortana!
 echo.
 echo   .settings /enable auto-update
-echo                       [ADMIN_REQUIRED] [WINDOWS 10 REQUIRED]
-echo                       It enables back the Windows 10 Auto Update!
+echo                       [ADMIN_REQUIRED] [WINDOWS 10/11 REQUIRED]
+echo                       It enables back the Windows 10/11 Auto Update!
 echo.
 echo   .settings /enable defender
 echo                       [ADMIN_REQUIRED]
 echo                       It enables back the Windows Defender!
 echo.
 echo   .settings /enable cortana
-echo                       [ADMIN_REQUIRED] [WINDOWS 10 REQUIRED]
-echo                       It enables back the Windows 10 Cortana!
+echo                       [ADMIN_REQUIRED] [WINDOWS 10/11 REQUIRED]
+echo                       It enables back the Windows 10/11 Cortana!
 echo.
 echo   .settings /activate 11 /pro
 echo                       [ADMIN_REQUIRED] [WINDOWS 11 PRO REQUIRED]
