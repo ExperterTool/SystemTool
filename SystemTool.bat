@@ -345,7 +345,7 @@ goto systemtool_cmd
 :rdp_port_change
 echo.
 set /p rdp_port_number="RDP Port Number: "
-if "%rdp_port_number%" == "cancel" (
+if "%rdp_port_number%" == ".cancel" (
 echo Canceled!
 goto systemtool_cmd
 ) else (
