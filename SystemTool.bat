@@ -300,23 +300,23 @@ echo                       [ADMIN_REQUIRED] [WINDOWS 10 REQUIRED]
 echo                       It enables back the Windows 10 Cortana!
 echo.
 echo   .settings /activate 11 /pro
-echo                       [ADMIN_REQUIRED] [WINDOWS 10 REQUIRED]
-echo                       It activates Windows 10 Enterprise!
+echo                       [ADMIN_REQUIRED] [WINDOWS 11 PRO REQUIRED]
+echo                       It activates Windows 11 Enterprise!
 echo.
 echo   .settings /activate 11 /enterprise
-echo                       [ADMIN_REQUIRED] [WINDOWS 10 REQUIRED]
-echo                       It activates Windows 10 Enterprise!
+echo                       [ADMIN_REQUIRED] [WINDOWS 11 ENTERPRISE REQUIRED]
+echo                       It activates Windows 11 Enterprise!
 echo.
 echo   .settings /activate 10 /pro
-echo                       [ADMIN_REQUIRED] [WINDOWS 10 REQUIRED]
+echo                       [ADMIN_REQUIRED] [WINDOWS 10 PRO REQUIRED]
 echo                       It activates Windows 10 Enterprise!
 echo.
 echo   .settings /activate 10 /enterprise
-echo                       [ADMIN_REQUIRED] [WINDOWS 10 REQUIRED]
+echo                       [ADMIN_REQUIRED] [WINDOWS 10 ENTERPRISE REQUIRED]
 echo                       It activates Windows 10 Enterprise!
 echo.
 echo   .settings /activate 7
-echo                       [ADMIN_REQUIRED] [WINDOWS 7 REQUIRED]
+echo                       [ADMIN_REQUIRED] [WINDOWS 7 ULTIMATE REQUIRED]
 echo                       It activates Windows 7 Ultimate for the next 30 days!
 echo.
 echo   .settings /unactivate
