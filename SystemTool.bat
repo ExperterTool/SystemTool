@@ -30,22 +30,7 @@ echo.
 :systemtool_cmd
 echo.
 set /p systemtool_cmd="Command: "
-if "%systemtool_cmd%" == ".cmd" (
-echo.
-echo To exit from Command Prompt, type:
-echo                                --^> .return ^<--
-goto cmd
-)
-if "%systemtool_cmd%" == ".powershell" (
-echo To exit from Powershell, type:
-echo                            --^> .return ^<--
-goto powershell
-)
 if "%systemtool_cmd%" == ".updatelog" (
-echo.
-echo Update v6.0:
-echo - Added:
-echo   - Command Prompt
 echo.
 echo Update v5.2:
 echo - Changed the Startup Menu
@@ -85,11 +70,11 @@ goto systemtool_cmd
 )
 )
 if "%systemtool_cmd%" == ".v" (
-echo Version: v6.0
+echo Version: v5.2
 goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".version" (
-echo Version: v6.0
+echo Version: v5.2
 goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".support" (
@@ -361,9 +346,6 @@ echo   .version            It's showing the current version of this application!
 echo.
 echo   .checkadmin         Checks if the current session is running as Administrator
 echo                       or as Normal User!
-echo.
-echo   .cmd                Opens a Windows Command Prompt session inside the SystemTool session.
-echo                       Use .return to exit and return to SystemTool!
 ) else (
 echo Sorry! This command is unavailable.
 )
@@ -379,11 +361,3 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-T
 echo Successfully changed the RDP Port to: %rdp_port_number%
 goto systemtool_cmd
 )
-:cmd
-echo.
-set /p et_cmd="%cd%>"
-if "%et_cmd%" == ".return" (
-goto systemtool_cmd
-)
-cmd.exe /c %et_cmd%
-goto cmd
