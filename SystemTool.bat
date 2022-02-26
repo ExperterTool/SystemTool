@@ -18,19 +18,22 @@ echo.
 echo.
 echo              ###################################
 echo              #                                 #
-echo              #           SystemTool            #
+echo              #       --^> SystemTool ^<--        #
 echo              #                                 #
 echo              ###################################
 echo.
 echo.
 echo.
 echo              To check the available commands, type:
-echo                                                     .help
+echo                                                 --^> .help ^<--
 echo.
 :systemtool_cmd
 echo.
 set /p systemtool_cmd="Command: "
 if "%systemtool_cmd%" == ".updatelog" (
+echo.
+echo Update v5.2:
+echo - Changed the Startup Menu
 echo.
 echo Update v5.1:
 echo - Fixed a bug for when the session
