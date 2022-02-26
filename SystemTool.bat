@@ -2,6 +2,7 @@
 color b
 reg add HKLM /v AdminCheck /t REG_DWORD /d 0 /f >nul 2>nul
 if not %errorlevel% == 0 (
+set errorlevel=0
 set admin_rights=0
 goto start
 ) else (
@@ -30,6 +31,10 @@ echo.
 echo.
 set /p systemtool_cmd="Command: "
 if "%systemtool_cmd%" == ".updatelog" (
+echo.
+echo Update v5.1:
+echo - Fixed a bug for when the session
+echo   is not running as Administrator!
 echo.
 echo Update v5.0:
 echo - Added support for Windows 11
@@ -62,11 +67,11 @@ goto systemtool_cmd
 )
 )
 if "%systemtool_cmd%" == ".v" (
-echo Version: v5.0
+echo Version: v5.1
 goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".version" (
-echo Version: v5.0
+echo Version: v5.1
 goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".support" (
