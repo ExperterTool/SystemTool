@@ -32,6 +32,9 @@ echo.
 set /p systemtool_cmd="Command: "
 if "%systemtool_cmd%" == ".updatelog" (
 echo.
+echo Update v6.1:
+echo - Fixed a bug on Windows Activation!
+echo.
 echo Update v6.0:
 echo - Added Outlook Mail Support
 echo - Removed ProtonMail Support
@@ -79,11 +82,11 @@ goto systemtool_cmd
 )
 )
 if "%systemtool_cmd%" == ".v" (
-echo Version: v6.0
+echo Version: v6.1
 goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".version" (
-echo Version: v6.0
+echo Version: v6.1
 goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".support" (
@@ -152,7 +155,6 @@ cscript //nologo C:\Windows\System32\slmgr.vbs /cpky >nul 2>nul
 cscript //nologo C:\Windows\System32\slmgr.vbs /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX >nul 2>nul
 cscript //nologo C:\Windows\System32\slmgr.vbs /skms s8.uk.to >nul 2>nul
 cscript //nologo C:\Windows\System32\slmgr.vbs /ato >nul 2>nul
-cscript //nologo C:\Windows\System32\slmgr.vbs /ckms >nul 2>nul
 echo Successfully Activated Windows 10 Pro!
 goto systemtool_cmd
 ) else (
@@ -167,7 +169,6 @@ cscript //nologo C:\Windows\System32\slmgr.vbs /cpky >nul 2>nul
 cscript //nologo C:\Windows\System32\slmgr.vbs /ipk NPPR9-FWDCX-D2C8J-H872K-2YT43 >nul 2>nul
 cscript //nologo C:\Windows\System32\slmgr.vbs /skms s8.uk.to >nul 2>nul
 cscript //nologo C:\Windows\System32\slmgr.vbs /ato >nul 2>nul
-cscript //nologo C:\Windows\System32\slmgr.vbs /ckms >nul 2>nul
 echo Successfully Activated Windows 10 Enterprise!
 goto systemtool_cmd
 ) else (
