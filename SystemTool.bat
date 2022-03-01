@@ -33,6 +33,8 @@ set /p systemtool_cmd="Command: "
 if "%systemtool_cmd%" == ".updatelog" (
 echo.
 echo Update v6.0:
+echo - Added Outlook Mail Support
+echo - Removed ProtonMail Support
 echo - Removed Discord Support
 echo - Removed support for Windows 11
 echo - Removed types of activation:
