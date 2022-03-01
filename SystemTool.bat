@@ -261,8 +261,8 @@ echo   .deltemp            [ADMIN_REQUIRED]
 echo                       It deletes the temporary files from the local user and Windows!
 echo.
 echo   .settings /disable auto-update
-echo                       [ADMIN_REQUIRED] [WINDOWS 10/11 REQUIRED]
-echo                       It disables the Windows 10/11 Auto Updates!
+echo                       [ADMIN_REQUIRED] [WINDOWS 10 REQUIRED]
+echo                       It disables the Windows 10 Auto Updates!
 echo.
 echo   .settings /disable defender
 echo                       [ADMIN_REQUIRED]
