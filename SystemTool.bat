@@ -32,6 +32,13 @@ echo.
 set /p systemtool_cmd="Command: "
 if "%systemtool_cmd%" == ".updatelog" (
 echo.
+echo Update v6.0:
+echo - Removed Discord Support
+echo - Removed support for Windows 11
+echo - Removed types of activation:
+echo   - Windows 11 Enterprise
+echo   - Windows 11 Pro
+echo.
 echo Update v5.2:
 echo - Changed the Startup Menu
 echo.
@@ -70,19 +77,16 @@ goto systemtool_cmd
 )
 )
 if "%systemtool_cmd%" == ".v" (
-echo Version: v5.2
+echo Version: v6.0
 goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".version" (
-echo Version: v5.2
+echo Version: v6.0
 goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".support" (
 echo.
-echo Email Support: expertertool@pm.me
-echo                expertertool@protonmail.com
-echo.
-echo Discord Support: https://discord.gg/sUBvbGkwT7
+echo Email Support: expertertool@outlook.com
 echo.
 echo YouTube: https://www.youtube.com/channel/UCV92mEdx4YIsRYB2-PxmFBQ?sub_confirmation=1
 echo.
@@ -139,21 +143,6 @@ echo Sorry! This command is running only as Administrator.
 goto systemtool_cmd
 )
 )
-if "%systemtool_cmd%" == ".settings /activate 11 /pro" (
-if "%admin_rights%" == "1" (
-cscript //nologo C:\Windows\System32\slmgr.vbs /upk >nul 2>nul
-cscript //nologo C:\Windows\System32\slmgr.vbs /cpky >nul 2>nul
-cscript //nologo C:\Windows\System32\slmgr.vbs /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX >nul 2>nul
-cscript //nologo C:\Windows\System32\slmgr.vbs /skms s8.uk.to >nul 2>nul
-cscript //nologo C:\Windows\System32\slmgr.vbs /ato >nul 2>nul
-cscript //nologo C:\Windows\System32\slmgr.vbs /ckms >nul 2>nul
-echo Successfully Activated Windows 11 Pro!
-goto systemtool_cmd
-) else (
-echo Sorry! This command is running only as Administrator.
-goto systemtool_cmd
-)
-)
 if "%systemtool_cmd%" == ".settings /activate 10 /pro" (
 if "%admin_rights%" == "1" (
 cscript //nologo C:\Windows\System32\slmgr.vbs /upk >nul 2>nul
@@ -163,21 +152,6 @@ cscript //nologo C:\Windows\System32\slmgr.vbs /skms s8.uk.to >nul 2>nul
 cscript //nologo C:\Windows\System32\slmgr.vbs /ato >nul 2>nul
 cscript //nologo C:\Windows\System32\slmgr.vbs /ckms >nul 2>nul
 echo Successfully Activated Windows 10 Pro!
-goto systemtool_cmd
-) else (
-echo Sorry! This command is running only as Administrator.
-goto systemtool_cmd
-)
-)
-if "%systemtool_cmd%" == ".settings /activate 11 /enterprise" (
-if "%admin_rights%" == "1" (
-cscript //nologo C:\Windows\System32\slmgr.vbs /upk >nul 2>nul
-cscript //nologo C:\Windows\System32\slmgr.vbs /cpky >nul 2>nul
-cscript //nologo C:\Windows\System32\slmgr.vbs /ipk NPPR9-FWDCX-D2C8J-H872K-2YT43 >nul 2>nul
-cscript //nologo C:\Windows\System32\slmgr.vbs /skms s8.uk.to >nul 2>nul
-cscript //nologo C:\Windows\System32\slmgr.vbs /ato >nul 2>nul
-cscript //nologo C:\Windows\System32\slmgr.vbs /ckms >nul 2>nul
-echo Successfully Activated Windows 11 Enterprise!
 goto systemtool_cmd
 ) else (
 echo Sorry! This command is running only as Administrator.
@@ -202,7 +176,7 @@ goto systemtool_cmd
 if "%systemtool_cmd%" == ".settings /enable cortana" (
 if "%admin_rights%" == "1" (
 reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCortana /f >nul 2>nul
-echo Successfully enabled Windows 10/11 Cortana!
+echo Successfully enabled Windows 10 Cortana!
 goto systemtool_cmd
 ) else (
 echo Sorry! This command is running only as Administrator.
@@ -222,7 +196,7 @@ goto systemtool_cmd
 if "%systemtool_cmd%" == ".settings /enable auto-update" (
 if "%admin_rights%" == "1" (
 reg delete HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU /v NoAutoUpdate /f >nul 2>nul
-echo Successfully enabled Windows 10/11 Auto-Updates!
+echo Successfully enabled Windows 10 Auto-Updates!
 goto systemtool_cmd
 ) else (
 echo Sorry! This command is running only as Administrator.
@@ -232,7 +206,7 @@ goto systemtool_cmd
 if "%systemtool_cmd%" == ".settings /disable cortana" (
 if "%admin_rights%" == "1" (
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCortana /t REG_DWORD /d 0 /f >nul 2>nul
-echo Successfully disabled Windows 10/11 Cortana!
+echo Successfully disabled Windows 10 Cortana!
 goto systemtool_cmd
 ) else (
 echo Sorry! This command is running only as Administrator.
@@ -252,7 +226,7 @@ goto systemtool_cmd
 if "%systemtool_cmd%" == ".settings /disable auto-update" (
 if "%admin_rights%" == "1" (
 reg add HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU /v NoAutoUpdate /t REG_DWORD /d 1 /f >nul 2>nul
-echo Successfully disabled Windows 10/11 Auto-Updates!
+echo Successfully disabled Windows 10 Auto-Updates!
 goto systemtool_cmd
 ) else (
 echo Sorry! This command is running only as Administrator.
@@ -293,28 +267,20 @@ echo                       [ADMIN_REQUIRED]
 echo                       It disables the Windows Defender!
 echo.
 echo   .settings /disable cortana
-echo                       [ADMIN_REQUIRED] [WINDOWS 10/11 REQUIRED]
-echo                       It disables the Windows 10/11 Cortana!
+echo                       [ADMIN_REQUIRED] [WINDOWS 10 REQUIRED]
+echo                       It disables the Windows 10 Cortana!
 echo.
 echo   .settings /enable auto-update
-echo                       [ADMIN_REQUIRED] [WINDOWS 10/11 REQUIRED]
-echo                       It enables back the Windows 10/11 Auto Update!
+echo                       [ADMIN_REQUIRED] [WINDOWS 10 REQUIRED]
+echo                       It enables back the Windows 10 Auto Update!
 echo.
 echo   .settings /enable defender
 echo                       [ADMIN_REQUIRED]
 echo                       It enables back the Windows Defender!
 echo.
 echo   .settings /enable cortana
-echo                       [ADMIN_REQUIRED] [WINDOWS 10/11 REQUIRED]
-echo                       It enables back the Windows 10/11 Cortana!
-echo.
-echo   .settings /activate 11 /pro
-echo                       [ADMIN_REQUIRED] [WINDOWS 11 PRO REQUIRED]
-echo                       It activates Windows 11 Enterprise!
-echo.
-echo   .settings /activate 11 /enterprise
-echo                       [ADMIN_REQUIRED] [WINDOWS 11 ENTERPRISE REQUIRED]
-echo                       It activates Windows 11 Enterprise!
+echo                       [ADMIN_REQUIRED] [WINDOWS 10 REQUIRED]
+echo                       It enables back the Windows 10 Cortana!
 echo.
 echo   .settings /activate 10 /pro
 echo                       [ADMIN_REQUIRED] [WINDOWS 10 PRO REQUIRED]
