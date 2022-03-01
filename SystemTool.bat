@@ -152,6 +152,7 @@ if "%systemtool_cmd%" == ".settings /activate 10 /pro" (
 if "%admin_rights%" == "1" (
 cscript //nologo C:\Windows\System32\slmgr.vbs /upk >nul 2>nul
 cscript //nologo C:\Windows\System32\slmgr.vbs /cpky >nul 2>nul
+cscript //nologo C:\Windows\System32\slmgr.vbs /ckms >nul 2>nul
 cscript //nologo C:\Windows\System32\slmgr.vbs /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX >nul 2>nul
 cscript //nologo C:\Windows\System32\slmgr.vbs /skms s8.uk.to >nul 2>nul
 cscript //nologo C:\Windows\System32\slmgr.vbs /ato >nul 2>nul
@@ -166,6 +167,7 @@ if "%systemtool_cmd%" == ".settings /activate 10 /enterprise" (
 if "%admin_rights%" == "1" (
 cscript //nologo C:\Windows\System32\slmgr.vbs /upk >nul 2>nul
 cscript //nologo C:\Windows\System32\slmgr.vbs /cpky >nul 2>nul
+cscript //nologo C:\Windows\System32\slmgr.vbs /ckms >nul 2>nul
 cscript //nologo C:\Windows\System32\slmgr.vbs /ipk NPPR9-FWDCX-D2C8J-H872K-2YT43 >nul 2>nul
 cscript //nologo C:\Windows\System32\slmgr.vbs /skms s8.uk.to >nul 2>nul
 cscript //nologo C:\Windows\System32\slmgr.vbs /ato >nul 2>nul
