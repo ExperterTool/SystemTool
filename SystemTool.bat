@@ -29,8 +29,32 @@ echo                                                 --^> .help ^<--
 echo.
 :systemtool_cmd
 echo.
-set /p systemtool_cmd="Command: "
+set /p "systemtool_cmd=Command: "
+if "%systemtool_cmd%" == ".stopthetime" (
+    if "%admin_rights%" == "1" (
+        set "et_time=%time%"
+        cls
+        echo.
+        echo Time Stopped!
+        echo.
+        echo Date: %date%
+        echo Time: %time%
+        goto stopthetime
+    ) else (
+        echo Missing Administrator Permissions!
+        goto systemtool_cmd
+    )
+)
 if "%systemtool_cmd%" == ".updatelog" (
+echo.
+echo Update v7.0:
+echo - Added a new command for
+echo   stopping the time in your
+echo   Windows PC!
+echo.
+echo Update v6.2:
+echo - Added Discord Support
+echo - Added Gmail Support
 echo.
 echo Update v6.1:
 echo - Fixed a bug on Windows Activation!
@@ -39,10 +63,6 @@ echo Update v6.0:
 echo - Added Outlook Mail Support
 echo - Removed ProtonMail Support
 echo - Removed Discord Support
-echo - Removed support for Windows 11
-echo - Removed types of activation:
-echo   - Windows 11 Enterprise
-echo   - Windows 11 Pro
 echo.
 echo Update v5.2:
 echo - Changed the Startup Menu
@@ -82,16 +102,18 @@ goto systemtool_cmd
 )
 )
 if "%systemtool_cmd%" == ".v" (
-echo Version: v6.1
+echo Version: v7.0
 goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".version" (
-echo Version: v6.1
+echo Version: v7.0
 goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".support" (
 echo.
 echo Email Support: expertertool@outlook.com
+echo.
+echo Gmail Email Support: expertertool@gmail.com
 echo.
 echo YouTube: https://www.youtube.com/channel/UCV92mEdx4YIsRYB2-PxmFBQ?sub_confirmation=1
 echo.
@@ -332,3 +354,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-T
 echo Successfully changed the RDP Port to: %rdp_port_number%
 goto systemtool_cmd
 )
+:stopthetime
+time %et_time%
+timeout /t 0 /nobreak >nul
+goto stopthetime
