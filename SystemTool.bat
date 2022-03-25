@@ -1,17 +1,18 @@
 @echo off
-color b
 reg add HKLM /v AdminCheck /t REG_DWORD /d 0 /f >nul 2>nul
-if not "%errorlevel%" == "0" (
-    set "errorlevel=0"
-    set "admin_rights=0"
-    goto start
+if "%errorlevel%" == "1" (
+    echo @echo off > %temp%\getadmin.bat
+    echo powershell Start-Process "%CD%\SystemTool.bat" -verb RunAs >> %temp%\getadmin.bat
+    echo exit >> %temp%\getadmin.bat
+    start %temp%\getadmin.bat
+    exit
 ) else (
     reg delete HKLM /v AdminCheck /f >nul 2>nul
-    set "admin_rights=1"
-    goto start
 )
+del /f /q %temp%\getadmin.bat >nul 2>nul
 :start
 title SystemTool
+color b
 cls
 echo.
 echo.
@@ -31,35 +32,21 @@ echo.
 echo.
 set /p "systemtool_cmd=Command: "
 if "%systemtool_cmd%" == ".stopthetime" (
-    if "%admin_rights%" == "1" (
-        set "et_time=%time%"
-        cls
-        echo.
-        echo Time Stopped!
-        echo.
-        echo Date: %date%
-        echo Time: %time%
-        goto stopthetime
-    ) else (
-        echo Missing Administrator Permissions!
-        goto systemtool_cmd
-    )
-)
-if "%systemtool_cmd%" == ".checkadmin" (
-    if "%admin_rights%" == "1" (
-        echo Running as Administrator!
-        goto systemtool_cmd
-    ) else (
-        echo Running in Normal Mode!
-        goto systemtool_cmd
-    )
+    set "et_time=%time%"
+    cls
+    echo.
+    echo Time Stopped!
+    echo.
+    echo Date: %date%
+    echo Time: %time%
+    goto stopthetime
 )
 if "%systemtool_cmd%" == ".v" (
-    echo Version: v10
+    echo Version: v12
     goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".version" (
-    echo Version: v10
+    echo Version: v12
     goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".support" (
@@ -77,142 +64,82 @@ if "%systemtool_cmd%" == ".exit" (
     exit
 )
 if "%systemtool_cmd%" == ".rdp /reset port" (
-    if "%admin_rights%" == "1" (
-        reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v PortNumber /t REG_DWORD /d 3389 /f >nul 2>nul
-        echo Successfully reset the RDP Port to: 3389
-        goto systemtool_cmd
-    ) else (
-        echo Missing Administrator Permissions!
-        goto systemtool_cmd
-    )
+    reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v PortNumber /t REG_DWORD /d 3389 /f >nul 2>nul
+    echo Successfully reset the RDP Port to: 3389
+    goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".rdp /change port" (
-    if "%admin_rights%" == "1" (
-        goto rdp_port_change
-    ) else (
-        echo Missing Administrator Permissions!
-        goto systemtool_cmd
-    )
+    goto rdp_port_change
 )
 if "%systemtool_cmd%" == ".clear" (
     cls
     goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".settings /unactivate" (
-    if "%admin_rights%" == "1" (
-        cscript //nologo C:\Windows\System32\slmgr.vbs /upk >nul 2>nul
-        cscript //nologo C:\Windows\System32\slmgr.vbs /cpky >nul 2>nul
-        cscript //nologo C:\Windows\System32\slmgr.vbs /ckms >nul 2>nul
-        echo Successfully unactivated Windows!
-        goto systemtool_cmd
-    ) else (
-        echo Missing Administrator Permissions!
-        goto systemtool_cmd
-    )
+    cscript //nologo C:\Windows\System32\slmgr.vbs /upk >nul 2>nul
+    cscript //nologo C:\Windows\System32\slmgr.vbs /cpky >nul 2>nul
+    cscript //nologo C:\Windows\System32\slmgr.vbs /ckms >nul 2>nul
+    echo Successfully unactivated Windows!
+    goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".settings /activate 7 /ultimate" (
-    if "%admin_rights%" == "1" (
-        cscript //nologo C:\Windows\System32\slmgr.vbs /upk >nul 2>nul
-        cscript //nologo C:\Windows\System32\slmgr.vbs /cpky >nul 2>nul
-        cscript //nologo C:\Windows\System32\slmgr.vbs /ckms >nul 2>nul
-        cscript //nologo C:\Windows\System32\slmgr.vbs /ipk D4F6K-QK3RD-TMVMJ-BBMRX-3MBMV >nul 2>nul
-        echo Successfully Activated Windows 7 Ultimate!
-        goto systemtool_cmd
-    ) else (
-        echo Missing Administrator Permissions!
-        goto systemtool_cmd
-    )
+    cscript //nologo C:\Windows\System32\slmgr.vbs /upk >nul 2>nul
+    cscript //nologo C:\Windows\System32\slmgr.vbs /cpky >nul 2>nul
+    cscript //nologo C:\Windows\System32\slmgr.vbs /ckms >nul 2>nul
+    cscript //nologo C:\Windows\System32\slmgr.vbs /ipk D4F6K-QK3RD-TMVMJ-BBMRX-3MBMV >nul 2>nul
+    echo Successfully Activated Windows 7 Ultimate!
+    goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".settings /activate 10" (
-    if "%admin_rights%" == "1" (
-        echo Please Wait...
-        cscript //nologo C:\Windows\System32\slmgr.vbs /upk >nul 2>nul
-        cscript //nologo C:\Windows\System32\slmgr.vbs /cpky >nul 2>nul
-        cscript //nologo C:\Windows\System32\slmgr.vbs /ckms >nul 2>nul
-        cscript //nologo C:\Windows\System32\slmgr.vbs /ipk NPPR9-FWDCX-D2C8J-H872K-2YT43 >nul 2>nul
-        cscript //nologo C:\Windows\System32\slmgr.vbs /skms s8.uk.to >nul 2>nul
-        cscript //nologo C:\Windows\System32\slmgr.vbs /ato >nul 2>nul
-        cscript //nologo C:\Windows\System32\slmgr.vbs /ckms >nul 2>nul
-        echo Successfully Activated Windows 10 Pro/Enterprise!
-        goto systemtool_cmd
-    ) else (
-        echo Missing Administrator Permissions!
-        goto systemtool_cmd
-    )
+    echo Please Wait...
+    cscript //nologo C:\Windows\System32\slmgr.vbs /upk >nul 2>nul
+    cscript //nologo C:\Windows\System32\slmgr.vbs /cpky >nul 2>nul
+    cscript //nologo C:\Windows\System32\slmgr.vbs /ckms >nul 2>nul
+    cscript //nologo C:\Windows\System32\slmgr.vbs /ipk NPPR9-FWDCX-D2C8J-H872K-2YT43 >nul 2>nul
+    cscript //nologo C:\Windows\System32\slmgr.vbs /skms s8.uk.to >nul 2>nul
+    cscript //nologo C:\Windows\System32\slmgr.vbs /ato >nul 2>nul
+    cscript //nologo C:\Windows\System32\slmgr.vbs /ckms >nul 2>nul
+    echo Successfully Activated Windows 10 Pro/Enterprise!
+    goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".settings /enable cortana" (
-    if "%admin_rights%" == "1" (
-        reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCortana /f >nul 2>nul
-        echo Successfully enabled Windows 10 Cortana!
-        goto systemtool_cmd
-    ) else (
-        echo Missing Administrator Permissions!
-        goto systemtool_cmd
-    )
+    reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCortana /f >nul 2>nul
+    echo Successfully enabled Windows 10 Cortana!
+    goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".settings /enable defender" (
-    if "%admin_rights%" == "1" (
-        reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /f >nul 2>nul
-        echo Successfully enabled Windows Defender!
-        goto systemtool_cmd
-    ) else (
-        echo Missing Administrator Permissions!
-        goto systemtool_cmd
-    )
+    reg delete "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /f >nul 2>nul
+    echo Successfully enabled Windows Defender!
+    goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".settings /enable auto-update" (
-    if "%admin_rights%" == "1" (
-        reg delete HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU /v NoAutoUpdate /f >nul 2>nul
-        echo Successfully enabled Windows 10 Auto-Updates!
-        goto systemtool_cmd
-    ) else (
-        echo Missing Administrator Permissions!
-        goto systemtool_cmd
-    )
+    reg delete HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU /v NoAutoUpdate /f >nul 2>nul
+    echo Successfully enabled Windows 10 Auto-Updates!
+    goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".settings /disable cortana" (
-    if "%admin_rights%" == "1" (
-        reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCortana /t REG_DWORD /d 0 /f >nul 2>nul
-        echo Successfully disabled Windows 10 Cortana!
-        goto systemtool_cmd
-    ) else (
-        echo Missing Administrator Permissions!
-        goto systemtool_cmd
-    )
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v AllowCortana /t REG_DWORD /d 0 /f >nul 2>nul
+    echo Successfully disabled Windows 10 Cortana!
+    goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".settings /disable defender" (
-    if "%admin_rights%" == "1" (
-        reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f >nul 2>nul
-        echo Successfully disabled Windows Defender!
-        goto systemtool_cmd
-    ) else (
-        echo Missing Administrator Permissions!
-        goto systemtool_cmd
-    )
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f >nul 2>nul
+    echo Successfully disabled Windows Defender!
+    goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".settings /disable auto-update" (
-    if "%admin_rights%" == "1" (
-        reg add HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU /v NoAutoUpdate /t REG_DWORD /d 1 /f >nul 2>nul
-        echo Successfully disabled Windows 10 Auto-Updates!
-        goto systemtool_cmd
-    ) else (
-        echo Missing Administrator Permissions!
-        goto systemtool_cmd
-    )
+    reg add HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU /v NoAutoUpdate /t REG_DWORD /d 1 /f >nul 2>nul
+    echo Successfully disabled Windows 10 Auto-Updates!
+    goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".deltemp" (
-    if "%admin_rights%" == "1" (
-        del /f /s /q %temp% >nul 2>nul
-        del /f /s /q %windir%\temp >nul 2>nul
-        del /f /s /q %windir%\prefetch >nul 2>nul
-        del /f /s /q %windir%\debug >nul 2>nul
-        del /f /s /q %windir%\logs >nul 2>nul
-        echo Successfully deleted the temporary files!
-        goto systemtool_cmd
-    ) else (
-        echo Missing Administrator Permissions!
-        goto systemtool_cmd
-    )
+    del /f /s /q %temp% >nul 2>nul
+    del /f /s /q %windir%\temp >nul 2>nul
+    del /f /s /q %windir%\prefetch >nul 2>nul
+    del /f /s /q %windir%\debug >nul 2>nul
+    del /f /s /q %windir%\logs >nul 2>nul
+    echo Successfully deleted the temporary files!
+    goto systemtool_cmd
 )
 if "%systemtool_cmd%" == ".help" (
     echo.
@@ -273,8 +200,8 @@ if "%systemtool_cmd%" == ".help" (
     echo.
     echo   .version            It's showing the current version of this application!
     echo.
-    echo   .checkadmin         Checks if the current session is running as Administrator
-    echo                       or as Normal User!
+    echo   .stopthetime        [ADMIN_REQUIRED]
+    echo                       It stops the Windows Time!
 ) else (
     echo Sorry! This command is unavailable.
 )
