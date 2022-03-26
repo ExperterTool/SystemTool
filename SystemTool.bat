@@ -10,6 +10,8 @@ if "%errorlevel%" == "1" (
     reg delete HKLM /v AdminCheck /f >nul 2>nul
 )
 del /f /q %temp%\getadmin.bat >nul 2>nul
+set "systemtool_cd=%~dp0"
+set "systemtool_cd=%systemtool_cd:~0,-1%"
 :start
 title SystemTool
 color b
@@ -41,6 +43,13 @@ if "%systemtool_cmd%" == ".stopthetime" (
     echo Time: %time%
     goto stopthetime
 )
+if "%systemtool_cmd%" == ".versionchecker" (
+    echo Please wait while we're checking the version from the Internet...
+    powershell wget -Uri 'https://github.com/ExperterTool/SystemTool/releases/download/SystemTool/SystemTool_VC.bat' -OutFile '%temp%\SystemTool_VC.bat'
+    call "%temp%\SystemTool_VC.bat" >nul 2>nul
+    del /f /q "%temp%\SystemTool_VC.bat" >nul 2>nul
+    goto versionchecker
+)
 if "%systemtool_cmd%" == ".v" (
     echo Version: v12
     goto systemtool_cmd
@@ -51,9 +60,8 @@ if "%systemtool_cmd%" == ".version" (
 )
 if "%systemtool_cmd%" == ".support" (
     echo.
-    echo Email Support: expertertool@outlook.com
-    echo.
-    echo Gmail Email Support: expertertool@gmail.com
+    echo Email Support: expertertool@gmail.com
+    echo                expertertool@outlook.com
     echo.
     echo YouTube: https://www.youtube.com/channel/UCV92mEdx4YIsRYB2-PxmFBQ?sub_confirmation=1
     echo.
@@ -217,7 +225,38 @@ if "%rdp_port_number%" == ".cancel" (
     echo Successfully changed the RDP Port to: %rdp_port_number%
     goto systemtool_cmd
 )
+goto systemtool_cmd
 :stopthetime
 time %et_time%
 timeout /t 0 /nobreak >nul
 goto stopthetime
+:versionchecker
+if "%systemtool_vc%" == "12" (
+    echo Latest!
+) else (
+    goto versionchecker2
+)
+goto systemtool_cmd
+:versionchecker2
+if not "%systemtool_vc%" == "12" (
+    echo.
+    echo New Update! ^(v12 -^> v%systemtool_vc%^)
+    echo Want to Update? [y/n]
+    echo.
+    set /p "update_confirmation=Update Confirmation: "
+    goto update_confirmation
+)
+:update_confirmation
+if "%update_confirmation%" == "y" (
+    cls
+    echo.
+    echo Updating...
+    powershell wget -Uri 'https://github.com/ExperterTool/SystemTool/releases/download/SystemTool/SystemTool.bat' -OutFile '%systemtool_cd%\SystemTool.bat'
+    echo Updated! Restart Required.
+    echo Press ENTER to restart...
+    pause >nul
+    start %systemtool_cd%\SystemTool.bat
+    exit
+) else (
+    goto systemtool_cmd
+)
